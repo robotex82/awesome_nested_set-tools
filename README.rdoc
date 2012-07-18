@@ -1,0 +1,29 @@
+= Awesome Nested Set Tools
+
+= Purpose
+
+
+= Features
+
+
+= Prerequisites
+
+= Installation
+
+Add it to your gemfile:
+
+  gem 'awesome_nested_set-tools'
+  
+Install your bundle:
+
+  > bundle install
+  
+= Usage
+
+  
+= Todo
+
+  
+= License
+  
+This project rocks and uses MIT-LICENSE.  
