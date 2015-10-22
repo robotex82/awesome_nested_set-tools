@@ -36,6 +36,7 @@ module AwesomeNestedSet
           elsif i != 0
             output << '</li><li>'
           end
+          o = o.first if o.is_a? Array 
           output << capture(o, path.size - 1, &block)
         end
         
