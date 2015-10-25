@@ -2,17 +2,20 @@ module AwesomeNestedSet
   module Tools
     module Helper
       def nested_li(objects, options = {}, &block)
-        options.reverse_merge! :tree_css_class => 'tree'
-        
+        options.reverse_merge!({
+          tree_css_classes: 'list-group',
+          item_css_classes: 'list-group-item'
+        })
+
         objects = objects.order(:lft) if objects.is_a? Class
 
         return '' if objects.size == 0
 
         if objects.first.root?
-          output = "<ul class=\"#{options[:tree_css_class]}\"><li>"
+          output = "<ul class=\"#{options[:tree_css_classes]}\"><li class=\"#{options[:item_css_classes]}\">"
         else
           output = ''
-        end  
+        end
         path = [nil]
 
         objects.each_with_index do |o, i|
@@ -24,27 +27,27 @@ module AwesomeNestedSet
                 path.pop
                 output << '</li></ul>'
               end
-              output << '</li><li>'
+              output << "</li><li class=\"#{options[:item_css_classes]}\">"
             else
               path << o.parent_id
               if i == 0 && !objects.first.root?
-                output << "<ul class=\"#{options[:tree_css_class]}\"><li>"          
+                output << "<ul class=\"#{options[:tree_css_classes]}\"><li class=\"#{options[:item_css_classes]}\">"
               else
-                output << '<ul><li>'          
+                output << "<ul><li class=\"#{options[:item_css_classes]}\">"
               end
             end
           elsif i != 0
-            output << '</li><li>'
+            output << "</li><li class=\"#{options[:item_css_classes]}\">"
           end
-          o = o.first if o.is_a? Array 
+          o = o.first if o.is_a? Array
           output << capture(o, path.size - 1, &block)
         end
-        
+
         if objects.first.root?
           output << '</li></ul>' * path.length
         else
           output << '</li></ul>' * (path.length - 1)
-        end  
+        end
         output.html_safe
       end
 
@@ -83,7 +86,7 @@ module AwesomeNestedSet
             recombine_lists(results, children_of, o.id)
           end
         end
-      end    
+      end
     end
-  end  
-end   
+  end
+end
