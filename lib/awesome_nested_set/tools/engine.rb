@@ -3,7 +3,7 @@ module AwesomeNestedSet
     class Engine < Rails::Engine
       # Add helpers
       config.to_prepare do
-        ApplicationController.helper(AwesomeNestedSet::Tools::Helper)
+        ::ApplicationController.helper(AwesomeNestedSet::Tools::Helper)
       end
       
       # Add locales
